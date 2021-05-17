@@ -1,5 +1,5 @@
 class Grade:
-    def setgrade(self,kor,eng,mat):
+    def setGrade(self, kor, eng, mat):
         self.kor = kor
         self.eng = eng
         self.mat = mat
@@ -9,10 +9,8 @@ class Grade:
     def avg(self):
         return self.sum() / 3
 
-
-
 if __name__ == '__main__':
     g = Grade()
-    g.setgrade(10,20,30)
+    g.setGrade(30,100,50)
     print(g.sum())
     print(g.avg())
