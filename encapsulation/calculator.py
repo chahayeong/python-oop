@@ -1,5 +1,6 @@
 class Calculator:
-    def setdata(self,first,second):
+
+    def __init__(self, first, second):
         self.first = first
         self.second = second
 
@@ -13,8 +14,7 @@ class Calculator:
         return self.first / self.second
 
 if __name__ == '__main__':
-    c = Calculator()
-    c.setdata(1,2)
+    c = Calculator(1,2)
     print(c.add())
     print(c.sub())
     print(c.mul())
