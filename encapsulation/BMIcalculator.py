@@ -19,7 +19,7 @@ class BMIcalculator(object):
         elif bmi <= 30:
             rate = '비만'
         else:
-            rate = '고도비만'
+            rate = '고도 비만'
         return rate
 
 
