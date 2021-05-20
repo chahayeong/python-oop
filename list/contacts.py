@@ -29,11 +29,12 @@ class Contacts(object):
                         del ls[i]
 
             elif menu == '4':
-                modify = input('수정할 이름을 입력하세요')
+                edit_name = input('수정할 이름: ')
+                edit_info = Contacts(edit_name, input('수정 전화번호'), input('수정 이메일'), input('수정 주소'))
                 for i, j in enumerate(ls):
-                    if j.name == modify:
-                        ls.append(Contacts(modify, input('전화번호:'), input('이메일:'), input('주소:')))
+                    if j.name == edit_name:
                         del ls[i]
+                        ls.append(edit_info)
 
             elif menu == '0':
                 print('프로그램을 종료합니다')
