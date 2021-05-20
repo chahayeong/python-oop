@@ -32,6 +32,7 @@ class Contacts(object):
                 modify = input('수정할 이름을 입력하세요')
                 for i, j in enumerate(ls):
                     if j.name == modify:
+                        ls.append(Contacts(modify, input('전화번호:'), input('이메일:'), input('주소:')))
                         del ls[i]
 
             elif menu == '0':
