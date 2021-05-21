@@ -1,16 +1,17 @@
 from random import *
 
 class Account(object):
-    def __init__(self, name, price):
+    def __init__(self, name, account, price):
         self.bankname = 'SC은행'
         self.name = name
-        self.account = self.rand_account()
+        self.account = account
         self.price = price
 
     def get_account(self):
         return f'은행명: {self.bankname}, 예금주: {self.name}, 계좌번호: {self.account}, 잔액: {self.price}'
 
-    def rand_account(self):
+    @staticmethod
+    def rand_account():
         num1 = randrange(0, 999)
         num2 = randrange(0, 99)
         num3 = randrange(0, 999999)
@@ -23,29 +24,41 @@ class Account(object):
         return account_number
 
     @staticmethod
+    def del_account(ls, account):
+        for i, j in enumerate(ls):
+            if j.account == account:
+                del ls[i]
+
+    @staticmethod
     def main():
         ls = []
         while True:
-            menu = input('1.계좌개설, 2.계좌출력, 3.계좌삭제, 4.계좌수정 0.프로그램종료 ')
+            menu = input('1.계좌개설, 2.계좌출력, 3.계좌삭제, 4.입금 5.출금 0.프로그램종료 ')
 
             if menu == '1':
-                ls.append(Account(str(input('예금주:')), int(input('초기잔액:'))))
+                ls.append(Account(str(input('예금주:')),Account.rand_account(), int(input('초기잔액:'))))
             elif menu == '2':
                 for i in ls:
                     print(i.get_account())
             elif menu == '3':
-                delname = input('삭제할 계좌 이름을 입력하세요')
-                for i,j in enumerate(ls):
-                    if j.name == delname:
-                        del ls[i]
+                account = Account(input('삭제할 계좌 번호:'),None, None)
+                account.del_account(ls, account.name)
             elif menu == '4':
-                modify_name = input('수정할 계좌 이름을 입력하세요')
-                modify_inpo = Account(modify_name, int(input('초기잔액:')))
-                for i, j in enumerate(ls):
-                    if j.name == modify_name:
-                        del ls[i]
-                        ls.append(modify_inpo)
-                pass
+                number = input('입금할 계좌번호:')
+                money = input('입금액:')
+                for i,j in enumerate(ls):
+                    if j.account == number:
+                        replace = Account(j.name, j.account, int(j.price) + int(money))
+                        Account.del_account(ls, number)
+                        ls.append(replace)
+            elif menu == '5':
+                number = input('출금할 계좌번호:')
+                money = input('출금액:')
+                for i,j in enumerate(ls):
+                    if j.account == number:
+                        replace = Account(j.name, j.account, int(j.price) - int(money))
+                        Account.del_account(ls, number)
+                        ls.append(replace)
             elif menu == '0':
                 print('프로그램을 종료합니다')
                 break

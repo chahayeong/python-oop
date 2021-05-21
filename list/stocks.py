@@ -7,6 +7,12 @@ class Stocks(object):
         return f'종목이름: {self.name}, 종목코드: {self.code}'
 
     @staticmethod
+    def del_element(ls, code):
+        for i, j in enumerate(ls):
+            if j.code == code:
+                del ls[i]
+
+    @staticmethod
     def main():
         ls = []
         while True:
@@ -17,17 +23,13 @@ class Stocks(object):
                 for i in ls:
                     print(f'출력결과: {i.stockprint()}')
             elif menu == '3':
-                stockName = input('삭제할 종목 이름을 입력하세요')
-                for i,j in enumerate(ls):
-                    if j.name == stockName:
-                        del ls[i]
+                stock = Stocks(None, input('삭제할 종목코드'))
+                stock.del_element(ls,stock.code)
             elif menu == '4':
-                modify_name = input('수정할 종목 이름을 입력하세요')
-                modify_info = Stocks(modify_name, input('종목코드:'))
-                for i, j in enumerate(ls):
-                    if j.name == modify_name:
-                        del ls[i]
-                        ls.append(modify_info)
+                code = input('수정할 종목코드')
+                stock = Stocks(input('수정할 이름'), code)
+                stock.del_element(ls, code)
+                ls.append(stock)
             elif menu == '0':
                 print('프로그램을 종료합니다')
                 break
